@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+protected:
+    string name;
+    int rollNumber;
+
+public:
+    Student(string n, int r) : name(n), rollNumber(r) {}
+};
+
+class SportsPlayer {
+protected:
+    string sportName;
+    int ranking;
+
+public:
+    SportsPlayer(string s, int r) : sportName(s), ranking(r) {}
+};
+
+class SportStudent : public Student, public SportsPlayer {
+public:
+    SportStudent(string n, int roll, string s, int rank)
+        : Student(n, roll), SportsPlayer(s, rank) {}
+
+    void displayDetails() {
+        cout << "Name: " << name << endl;
+        cout << "Roll Number: " << rollNumber << endl;
+        cout << "Sport: " << sportName << endl;
+        cout << "Ranking: " << ranking << endl;
+    }
+};
+
+int main() {
+    SportStudent ss("John Doe", 101, "Basketball", 1);
+    ss.displayDetails();
+    return 0;
+}
