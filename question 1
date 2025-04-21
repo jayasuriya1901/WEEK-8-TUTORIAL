@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Complex {
+    int real, imag;
+
+public:
+    Complex(int r, int i) : real(r), imag(i) {}
+
+    friend ostream& operator<<(ostream& out, const Complex& c) {
+        out << c.real << " + " << c.imag << "i";
+        return out;
+    }
+};
+
+class Ticket {
+    string movieName;
+    int seatNumber;
+    bool isBooked;
+
+public:
+    Ticket(string name, int seat) : movieName(name), seatNumber(seat), isBooked(false) {}
+
+    void bookTicket() {
+        if (!isBooked) {
+            isBooked = true;
+            cout << "Ticket booked for " << movieName << " Seat: " << seatNumber << endl;
+        } else {
+            cout << "Ticket already booked" << endl;
+        }
+    }
+
+    void cancelTicket() {
+        if (isBooked) {
+            isBooked = false;
+            cout << "Ticket canceled for " << movieName << " Seat: " << seatNumber << endl;
+        } else {
+            cout << "No booking to cancel" << endl;
+        }
+    }
+};
+
+int main() {
+    Complex c1(3, 4);
+    cout << c1 << endl;
+
+    Ticket t1("Inception", 101);
+    Ticket t2("Interstellar", 102);
+
+    t1.bookTicket();
+    t1.cancelTicket();
+    t2.bookTicket();
+    t2.cancelTicket();
+
+    return 0;
+}
