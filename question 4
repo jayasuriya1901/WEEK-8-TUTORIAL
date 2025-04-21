@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Shape {
+public:
+    virtual void getData() = 0;
+    virtual void printData() = 0;
+    virtual double calculateArea() = 0;
+    virtual ~Shape() {}
+};
+
+class Rectangle : public Shape {
+private:
+    double length, width;
+
+public:
+    void getData() {
+        cin >> length >> width;
+    }
+
+    void printData() {
+        cout << "Rectangle: Length = " << length << ", Width = " << width << endl;
+    }
+
+    double calculateArea() {
+        return length * width;
+    }
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    void getData() {
+        cin >> radius;
+    }
+
+    void printData() {
+        cout << "Circle: Radius = " << radius << endl;
+    }
+
+    double calculateArea() {
+        return M_PI * radius * radius;
+    }
+};
+
+int main() {
+    Shape* shape;
+
+    Rectangle rect;
+    shape = &rect;
+    shape->getData();
+    shape->printData();
+    cout << "Area: " << shape->calculateArea() << endl;
+
+    Circle circ;
+    shape = &circ;
+    shape->getData();
+    shape->printData();
+    cout << "Area: " << shape->calculateArea() << endl;
+
+    return 0;
+}
