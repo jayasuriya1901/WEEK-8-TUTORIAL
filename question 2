@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Car {
+private:
+    string model;
+    double pricePerDay;
+    bool isAvailable;
+
+public:
+    Car() : model("Unknown"), pricePerDay(0.0), isAvailable(true) {}
+    Car(string m, double p, bool a) : model(m), pricePerDay(p), isAvailable(a) {}
+    Car(const Car& c) : model(c.model), pricePerDay(c.pricePerDay), isAvailable(c.isAvailable) {}
+
+    double bookCar(int days) { return pricePerDay * days; }
+    double bookCar(double discountPercentage) { return pricePerDay * (1 - discountPercentage / 100); }
+    double bookCar(int days, double insurance) { return pricePerDay * days + insurance; }
+
+    bool operator>(const Car& other) const { return pricePerDay > other.pricePerDay; }
+    double operator+(const Car& other) const { return pricePerDay + other.pricePerDay; }
+
+    void displayCarDetails() {
+        cout << model << " " << pricePerDay << " " << (isAvailable ? "Available" : "Not Available") << endl;
+    }
+};
+
+int main() {
+    Car car1("Sedan", 50.0, true);
+    Car car2("SUV", 75.0, true);
+    Car car3 = car1;
+
+    car1.displayCarDetails();
+    car2.displayCarDetails();
+    car3.displayCarDetails();
+
+    cout << "Booking cost for car1 for 3 days: " << car1.bookCar(3) << endl;
+    cout << "Booking cost for car2 with 10% discount: " << car2.bookCar(10) << endl;
+    cout << "Booking cost for car1 for 5 days with $20 insurance: " << car1.bookCar(5, 20) << endl;
+
+    if (car2 > car1) cout << "Car2 is more expensive than Car1 per day." << endl;
+    cout << "Combined rental price per day: " << car1 + car2 << endl;
+
+    return 0;
+}
